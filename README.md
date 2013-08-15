@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/twilio/twilio-ruby.png?branch=master)](https://travis-ci.org/twilio/twilio-ruby)
+[![Gem Version](https://badge.fury.io/rb/twilio-ruby.png)](http://badge.fury.io/rb/twilio-ruby)
+
 ## Install
 
 Via rubygems.org:
@@ -66,6 +69,13 @@ auth_token = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 @call.hangup
 ```
 
+### List Calls after a certain time
+
+``` ruby
+# list calls made or received on or after May 13, 2013
+@client.account.calls.list("start_time>" => "2013-05-13") # Notice we omit the "=" in the "start_time>=" parameter because it is automatically added
+```
+
 ### Buy a Phone Number
 
 ``` ruby
@@ -120,7 +130,7 @@ require 'twilio-ruby'
 
 # build up a response
 response = Twilio::TwiML::Response.new do |r|
-  r.Say 'hello there', :voice => 'woman'
+  r.Say 'hello there', :voice => 'alice'
   r.Dial :callerId => '+14159992222' do |d|
     d.Client 'jenny'
   end
@@ -135,7 +145,7 @@ This will print the following (except for the whitespace):
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="woman">hello there</Say>
+  <Say voice="alice">hello there</Say>
   <Dial callerId="+14159992222">
     <Client>jenny</Client>
   </Dial>
